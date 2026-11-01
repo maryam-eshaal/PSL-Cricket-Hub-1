@@ -14,7 +14,12 @@ verified it is shown as "N/A" or "—" instead of being guessed.
 Team logos and player photos are NOT official: logos are generated badges drawn with
 Pillow, and photos are generated initials avatars (you can upload your own photo).
 """
-
+import subprocess, sys
+try:
+    import matplotlib
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install",
+                           "matplotlib", "pandas", "pillow", "requests"])
 import base64
 import io
 import json
