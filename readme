@@ -1,0 +1,65 @@
+# 🏏 PSL Cricket Hub
+
+A colourful Pakistan Super League app in a single file (`app.py`).
+
+| Command | What you get |
+|---|---|
+| `streamlit run app.py` | The full web app (Streamlit + Pandas + Matplotlib + Pillow) |
+| `python app.py` | A small Gradio explorer (teams, players, seasons) |
+| `python app.py --turtle` | A Turtle drawing of the PSL trophy (desktop window only) |
+
+## Features
+- **Teams:** all 8 PSL 2026 teams, generated logo badges, captains, 2026 squads, titles and a downloadable team card.
+- **Players:** profiles with country, role, calculated age, PSL 2026 stats and an optional photo upload.
+- **Matches & scoreboards:** schedule, final scorecards (runs, wickets, overs), the 2026 league table, and an optional live-API tab.
+- **History:** every season 2016-2026: winner, runner-up, top run-scorer, top wicket-taker, Player of the Tournament, with charts.
+- **Fan vote:** vote for a team, see percentages, then crown the favourite with a confetti popup.
+
+## Install and run on Windows
+1. Install Python 3.10+ from python.org (tick **Add Python to PATH**).
+2. Put `app.py`, `requirements.txt` and `README.md` in one folder, open Command Prompt there, then run:
+
+```
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+The browser opens at http://localhost:8501. For the Gradio explorer use `python app.py`.
+
+## Run on Google Colab
+Upload the three files, then run in cells:
+
+```python
+!pip install -r requirements.txt
+!python app.py          # Gradio explorer; Colab prints a public link
+```
+
+To run the full Streamlit app on Colab:
+
+```python
+!pip install -q localtunnel
+!streamlit run app.py &>/content/log.txt &
+!curl https://loca.lt/mytunnelpassword      # shows the password for the tunnel page
+!npx localtunnel --port 8501
+```
+
+Open the link and enter the password shown above. Turtle does not work on Colab (no screen).
+
+## Optional live cricket data
+Get a free key from https://cricketdata.org, then either paste it in **Matches & Scoreboards → Live**, or set it first:
+
+```
+set CRICAPI_KEY=your_key_here        (Windows)
+```
+
+The app lists live matches whose name contains "Pakistan Super League" or "PSL". If none are on, it says so.
+
+## About the data (please read)
+- Facts were checked in **November 2026** against Wikipedia season pages, ESPNcricinfo, PCB and news reports (sources are listed in the app's *Fun corner*). Anything not verified is shown as **N/A** or **—**, never guessed.
+- **Logos and photos are not official.** Logos are badges and photos are initials avatars generated with Pillow. Team colours are decorative. You can upload a photo per player.
+- Ages are calculated from birth dates, and only players whose date of birth was certain have one.
+- Some sources disagree: Wikipedia lists **Ashton Turner** as 2026 Multan Sultans captain while one preview named Shan Masood; Shane Watson's 2019 runs appear as 430 and 435 (430 is used). Squads can change, so verify with psl-t20.com.
+- PSL 12 runs **18 March - 2 May 2027** (PCB, 8 Oct 2026); fixtures and venues are not announced yet.
+- To update data, edit the lists at the top of `app.py` (`TEAMS`, `SQUADS`, `SEASONS`, `PLAYERS`, ...).
+
+Votes are saved in `votes.json`. Delete it to reset.
