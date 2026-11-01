@@ -1,0 +1,6 @@
+streamlit>=1.37
+pandas>=2.0
+matplotlib>=3.7
+pillow>=10.0
+gradio>=4.0
+requests>=2.31
